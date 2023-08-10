@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app" class="container mt-5">
+      <form onsubmit="getData(event);" id="form">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            id="search"
+            class="form-control"
+            placeholder="Įveskite ieškomo gėrimo pavadinimą"
+          />
+          <button class="btn btn-primary">Ieškoti</button>
+        </div>
+      </form>
+
+      <h4 id="abc">
+        <a href="">A</a> / <a href="">B</a> / <a href="">C</a> /
+        <a href="">D</a> / <a href="">E</a> / <a href="">F </a>/
+        <a href="">G</a> / <a href="">H</a> /<a href=""> I</a> /
+        <a href="">J</a> /<a href=""> K</a> /<a href=""> L</a> /<a href="">
+          M</a
+        >
+        /<a href=""> N</a> / <a href="">O</a> /<a href=""> P</a> /
+        <a href="">Q</a> / <a href="">R</a> / <a href="">S</a> /
+        <a href="">T </a>/ <a href="">U</a> / <a href="">V</a> /
+        <a href="">W</a> / <a href="">X</a> / <a href="">Y</a> /
+        <a href="">Z</a>
+      </h4>
+
+      <button class="btn1 btn-primary" onclick="randomList()" id="luck">
+        Man sekasi
+      </button>
+      <div id="result"></div>
+      <div class="inf"></div><div class="letters"></div>
+      <div id="list"></div>
+      <div id="inf1"></div>
+    </div>
+    <div class="row" id="drk"></div>
+    <script src="main.js"></script>
+  </body>
+</html>
