@@ -1,5 +1,7 @@
 const form = document.getElementById("form");
 const drk = document.getElementById("drk");
+const result = document.getElementById("result");
+const inf1 = document.getElementById("inf1");
 function getData(e) {
   e.preventDefault();
   const value = document.getElementById("search").value;
@@ -8,7 +10,8 @@ function getData(e) {
     .then((resp) => resp.json())
     .then((resp) => {
       const result = document.getElementById("result");
-
+      result.innerHTML = "";
+      
       console.log(resp);
       if (!resp.drinks)
         return (result.innerHTML = `<div class="alert alert-danger">Pagal įvestą užklausą nepavyko rasti jokių rezultatų.</div>`);
@@ -28,6 +31,7 @@ function getData(e) {
 
       result.innerHTML = html;
       document.getElementById("luck").style.display = "block";
+      document.getElementById("abc").style.display = "block";
       form.style.display = "block";
     });
 }
@@ -41,6 +45,7 @@ function getDrink(e, id) {
       const result = document.getElementById("result");
       const data = resp.drinks[0];
       let ingredients = "";
+      
 
       for (let i = 1; i <= 15; i++) {
         if (data["strIngredient" + i])
@@ -48,6 +53,9 @@ function getDrink(e, id) {
             data["strMeasure" + i] ? data["strMeasure" + i] : ""
           }</li>`;
       }
+
+      
+      
 
       result.innerHTML = `
             <div class="row">
@@ -70,12 +78,14 @@ function getDrink(e, id) {
                     <p>${data.strInstructions}</p>
                     <h4>Ingridientai</h4>
                     <ul>
-                        <a href=""onclick="ingList(event,'${ingredients}')">${ingredients}</a>
+                    <a href=""onclick="ingList(event,'${ingredients}')"><li>${ingredients}</li>
+                     </a>
                     </ul>
                     <a href="#" onclick="getData(event)">Atgal į sąrašą</a>
                 </div>
             </div>
         `;
+        drk.innerHTML = "";
       document.getElementById("abc").style.display = "none";
       document.getElementById("luck").style.display = "none";
       form.style.display = "none";
@@ -87,6 +97,7 @@ function randomList() {
     .then((resp) => resp.json())
     .then((resp) => {
       console.log(resp);
+      bc.innerHTML = "";
       const list = document.getElementById("list");
       const info = resp.drinks[0];
       let ingredients = "";
@@ -119,13 +130,11 @@ function randomList() {
 </div>
 `;
       document.getElementById("abc").style.display = "none";
-      //document.getElementById("luck").style.display = "none";
+     
       form.style.display = "none";
       document.getElementById("drk").style.display = "none";
     });
 }
-
-
 
 function glassList(e, glass) {
   e.preventDefault();
@@ -200,7 +209,6 @@ function categoryList(e, cat) {
     });
 }
 
-
 const bc = document.querySelector(".inf");
 
 function letterSearch(letter) {
@@ -208,13 +216,18 @@ function letterSearch(letter) {
     .then((resp) => resp.json())
     .then((data) => {
       const dArray = data.drinks;
+      console.log(data);
       bc.innerHTML = ""; // Clear previous content
+      drk.innerHTML = "";
+      inf1.innerHTML = "";
+       result.innerHTML = "";
       dArray.forEach((value) => {
-        const fotoElement = document.createElement("div");
-        fotoElement.classList.add("foto");
-        fotoElement.innerHTML = `<img src="${value.strDrinkThumb}" alt="">
-          <h3>${value.strDrink}</h3>`;
-        bc.appendChild(fotoElement);
+        const fotoEl = document.createElement("div");
+        fotoEl.classList.add("foto");
+        fotoEl.innerHTML = `<a href="#" onclick="getDrink(event, ${value.idDrink})"><img src="${value.strDrinkThumb}" alt="">
+          <h3>${value.strDrink}</h3></a>`;
+        bc.appendChild(fotoEl);
+        
       });
     })
     .catch((error) => {
@@ -224,19 +237,43 @@ function letterSearch(letter) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const letterArray = [
-    "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
-    "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
   ];
 
-  const lettersContainer = document.querySelector(".letters");
+  const ltr = document.querySelector("#abc");
 
   letterArray.forEach((letter) => {
     const letterLink = document.createElement("a");
-    letterLink.textContent = letter.toUpperCase();
+    letterLink.textContent = letter.toUpperCase() + " * ";
     letterLink.href = "#";
     letterLink.addEventListener("click", () => {
       letterSearch(letter);
     });
-    lettersContainer.appendChild(letterLink);
+    ltr.appendChild(letterLink);
   });
 });
