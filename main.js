@@ -141,6 +141,7 @@ function glassList(e, glass) {
   fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?g=` + glass)
     .then((resp) => resp.json())
     .then((resp) => {
+      result.innerHTML ='';
       let html = `
                       <div class="row">`;
 
@@ -159,6 +160,7 @@ function ingList(e, ing) {
   fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=` + ing)
     .then((resp) => resp.json())
     .then((resp) => {
+      result.innerHTML ='';
       let html = `
                       <div class="row">`;
 
@@ -177,6 +179,7 @@ function alcList(e, alk) {
   fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=" + alk)
     .then((resp) => resp.json())
     .then((resp) => {
+      result.innerHTML ='';
       let html = `
                       <div class="row">`;
 
@@ -195,6 +198,7 @@ function categoryList(e, cat) {
   fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=" + cat)
     .then((resp) => resp.json())
     .then((resp) => {
+      result.innerHTML ='';
       let html = `
                       <div class="row">`;
 
